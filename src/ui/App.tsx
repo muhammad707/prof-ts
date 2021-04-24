@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   BrowserRouter as Router,
+  match,
   Route,
   Switch,
 } from 'react-router-dom';
@@ -12,7 +13,7 @@ import TeamSelector from './components/TeamSelector';
 
 const { useState } = React;
 
-const App = () => {
+const App: React.FunctionComponent<any> = () => {
   const [teams, setTeams] = useState();
 
   useAsyncDataEffect(() => getAllTeams(), {
@@ -37,7 +38,7 @@ const App = () => {
           </Route>
           <Route
             path="/team/:teamId"
-            children={({ match }) => (
+            children={({ match }: {match: match<{teamId: string}>}) => (
               <SelectedTeam match={match} teams={teams} />
             )}
           />
